@@ -1,18 +1,16 @@
 function elementsSum(...arguments) {
-    const sumOfArgsL1 = arguments.length ? arguments.reduce((sum, currentElement) => sum + currentElement) : 0;
+    let result = arguments.length ? arguments.reduce((sum, currentElement) => sum + currentElement) : 0;
 
-    return (...arguments) => {
-        const sumOfArgsL2 = arguments.length
-            ? arguments.reduce((sum, currentElement) => sum + currentElement) + sumOfArgsL1 : sumOfArgsL1;
+    const sumFn = (...argumentsFn) => {
+        const sumOfArgs = argumentsFn.length ? argumentsFn.reduce((sum, currentElement) => sum + currentElement) : 0;
+        result += sumOfArgs;
 
-        return (...arguments) => {
-            const sumOfArgsL3 = arguments.length
-                ? arguments.reduce((sum, currentElement) => sum + currentElement) + sumOfArgsL2 : sumOfArgsL2;
+        return sumFn;
+    };
 
-            return (...arguments) => arguments.length
-                ? arguments.reduce((sum, currentElement) => sum + currentElement) + sumOfArgsL3 : sumOfArgsL3;
-        }
-    }
+    sumFn.toString = () => result;
+
+    return sumFn;
 }
 
 console.log(elementsSum(1)(2)(3)(4));
