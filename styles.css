@@ -1,0 +1,9 @@
+table {
+    height: 1000px;
+    width: 1500px;
+}
+
+table tr td {
+    cursor: default;
+    border: 1px solid black;
+}
